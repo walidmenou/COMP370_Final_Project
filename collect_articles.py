@@ -42,7 +42,7 @@ def fetch_articles(api_key=API_KEY, query=QUERY, max_articles=MAX_ARTICLES):
                 articles.append(
                     {
                         "title": result.get("title", ""),
-                        "summary": result.get("ai_summary"),
+                        "description": result.get("description"),
                     }
                 )
             print(f"Fetched {len(results)} articles. Total: {len(articles)}")
@@ -68,7 +68,7 @@ def save_data(articles, filename):
         return
 
     with open(filename, "w", encoding="utf8") as f:
-        fieldnames = ["title", "summary"]
+        fieldnames = ["title", "description"]
         writer = csv.DictWriter(f, fieldnames=fieldnames)
 
         writer.writeheader()
