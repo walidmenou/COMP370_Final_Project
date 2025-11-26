@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 API_KEYS = [os.getenv("KEY1"), os.getenv("KEY2")]
+COUNTRIES = "us,ca,mx"
 URL = "https://newsdata.io/api/1/latest"
 QUERY = "Trump"
 MAX_ARTICLES = 500
@@ -32,14 +33,21 @@ def get_unique_articles(seen, results):
     return articles
 
 
-def fetch_articles(api_keys=API_KEYS, query=QUERY, max_articles=MAX_ARTICLES):
+def fetch_articles(
+    api_keys=API_KEYS, query=QUERY, max_articles=MAX_ARTICLES, countries=COUNTRIES
+):
     articles = []
     seen = set()
     key_index = 0
     next_page = None
 
     while len(articles) < max_articles:
-        params = {"apikey": api_keys[key_index], "q": query, "language": "en"}
+        params = {
+            "apikey": api_keys[key_index],
+            "qInTitle": query,
+            "language": "en",
+            "countries": countries,
+        }
         if next_page:
             params["page"] = next_page
         try:
