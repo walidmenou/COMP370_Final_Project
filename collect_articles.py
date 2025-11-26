@@ -21,7 +21,13 @@ def get_unique_articles(seen, results):
             continue
         seen.add(title)
 
-        articles.append({"title": title, "description": result.get("description", "")})
+        articles.append(
+            {
+                "title": title,
+                "description": result.get("description", ""),
+                "url": result.get("link", ""),
+            }
+        )
 
     return articles
 
@@ -74,7 +80,7 @@ def save_data(articles, filename):
     if not articles:
         return
     with open(filename, "w", encoding="utf8") as f:
-        writer = csv.DictWriter(f, fieldnames=["title", "description"])
+        writer = csv.DictWriter(f, fieldnames=["title", "description", "url"])
         writer.writeheader()
         writer.writerows(articles)
 
