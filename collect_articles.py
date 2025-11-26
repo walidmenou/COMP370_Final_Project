@@ -46,7 +46,7 @@ def fetch_articles(
             "apikey": api_keys[key_index],
             "qInTitle": query,
             "language": "en",
-            "countries": countries,
+            "country": countries,
         }
         if next_page:
             params["page"] = next_page
