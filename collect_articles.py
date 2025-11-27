@@ -6,7 +6,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-API_KEYS = [os.getenv("KEY1"), os.getenv("KEY2")]
+API_KEYS = [
+    os.getenv("KEY1"),
+    os.getenv("KEY2"),
+    os.getenv("KEY3"),
+    os.getenv("KEY4"),
+    os.getenv("KEY5"),
+]
 COUNTRIES = "us,ca,mx"
 URL = "https://newsdata.io/api/1/latest"
 QUERY = "Trump"
@@ -55,6 +61,7 @@ def fetch_articles(
 
             if response.status_code == 429 and key_index < len(api_keys) - 1:
                 key_index += 1
+                print("Switching api keys...")
                 params["apikey"] = api_keys[key_index]
                 response = requests.get(URL, params=params)
 
