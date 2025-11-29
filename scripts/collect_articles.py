@@ -17,7 +17,7 @@ COUNTRIES = "us,ca,mx"
 URL = "https://newsdata.io/api/1/latest"
 QUERY = "Trump"
 MAX_ARTICLES = 500
-OUTPUT_FILE = "data.csv"
+OUTPUT_FILE = "data/data.csv"
 
 
 def get_unique_articles(seen, results):
