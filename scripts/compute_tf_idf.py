@@ -44,10 +44,11 @@ def main():
         # creates tuple list of (word, tf-idf score)
         word_list = [(feature_names[i], float(row[i])) for i in top_indices]
 
-        results.append({
-            "topic": topic,
-            "top_words": word_list
-        })
+        result_row = {"topic": topic}
+        for rank, (word, score) in enumerate(word_list, start=1):
+            result_row[f"word_{rank}"] = word
+
+        results.append(result_row)
 
     out_df = pd.DataFrame(results)
     out_df.to_csv(OUTPUT_CSV, index=False)
