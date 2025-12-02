@@ -18,6 +18,17 @@ def main():
 
     df["text"] = df["title"].astype(str) + " " + df["description"].astype(str)
 
+    # remove years, "Trump", and days of the week from data
+    df["text"] = df["text"].str.replace(r'\b(?:19|20)\d{2}\b', '', regex=True)
+    df["text"] = df["text"].str.replace(r"(?i)\btrump(?:'s)?\b", "", regex=True)
+    df["text"] = df["text"].str.replace(
+        r'(?i)\b(?:monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b',
+        '',
+        regex=True
+    )
+
+    df["text"] = df["text"].str.replace(r'\s+', ' ', regex=True).str.strip()
+
     df = df.dropna(subset=["annotation"])
 
     grouped = df.groupby("annotation")["text"].apply(lambda rows: " ".join(rows))
