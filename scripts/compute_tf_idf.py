@@ -59,6 +59,7 @@ def main():
         result_row = {"topic": topic}
         for rank, (word, score) in enumerate(word_list, start=1):
             result_row[f"word_{rank}"] = word
+            result_row[f"score_{rank}"] = score
 
         results.append(result_row)
 
